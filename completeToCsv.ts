@@ -6,7 +6,7 @@ import { CompleteResponse } from "./type";
 
 const config = {
   method: 'get',
-  url: 'https://api.todoist.com/sync/v9/completed/get_all?limit=200',
+  url: 'https://api.todoist.com/sync/v9/completed/get_all?limit=200&since=2023-1-29T00:00&until=2023-2-5T00:00',
   headers: { 
     'Authorization': `Bearer ${process.env.todoistToken}`, 
   }
@@ -17,7 +17,7 @@ const getCompleteTaskToCsv = async()=>{
     const res = await axios<any,AxiosResponse<CompleteResponse>>(config)
     const data = res.data.items
     const csv = new ObjectsToCsv(data)
-    await csv.toDisk('./weeklyCompleteTask.csv');
+    await csv.toDisk('./generated/weeklyCompleteTask.csv');
   }
   catch(e){
     console.log(e)
