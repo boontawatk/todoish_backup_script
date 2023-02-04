@@ -3,17 +3,25 @@ dotenv.config()
 import axios, { AxiosResponse } from "axios";
 import ObjectsToCsv from "objects-to-csv";
 import { CompleteResponse } from "./type";
-
-const config = {
-  method: 'get',
-  url: 'https://api.todoist.com/sync/v9/completed/get_all?limit=200&since=2023-1-29T00:00&until=2023-2-5T00:00',
-  headers: { 
-    'Authorization': `Bearer ${process.env.todoistToken}`, 
-  }
-};
+import dayjs from 'dayjs';
 
 const getCompleteTaskToCsv = async()=>{
   try{
+    //start last week, end today
+    const end = dayjs().startOf('day')
+    const start = end.subtract(7,'day')
+
+    const endDateFormat = end.format('YYYY-MM-DDTHH:mm')
+    const startDateFormat = start.format('YYYY-MM-DDTHH:mm')
+    console.log(`since : ${startDateFormat}`)
+    console.log(`until : ${endDateFormat}`)
+    const config = {
+      method: 'get',
+      url: `https://api.todoist.com/sync/v9/completed/get_all?limit=200&since=${startDateFormat}&until=${endDateFormat}`,
+      headers: { 
+        'Authorization': `Bearer ${process.env.todoistToken}`, 
+      }
+    };
     const res = await axios<any,AxiosResponse<CompleteResponse>>(config)
     const data = res.data.items
     const csv = new ObjectsToCsv(data)
