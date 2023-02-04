@@ -1,0 +1,20 @@
+{
+  "name": "todoish_backup_script",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "complete": "ts-node completeToCsv.ts"
+  },
+  "dependencies": {
+    "@types/node": "^18.11.18",
+    "@types/objects-to-csv": "^1.3.1",
+    "axios": "^1.3.2",
+    "dotenv": "^16.0.3",
+    "objects-to-csv": "^1.3.6",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
