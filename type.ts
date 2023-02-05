@@ -29,7 +29,23 @@ export interface Projects {
     [key: string]: Project
 }
 
-export interface Sections {}
+export interface Section {
+    added_at: Date
+    archived_at?: any
+    collapsed: boolean
+    id: string
+    is_archived: boolean
+    is_deleted: boolean
+    name: string
+    project_id: string
+    section_order: number
+    sync_id?: any
+    user_id: string
+}
+
+export interface Sections {
+    [key: string]: Section
+}
 
 export interface CompleteResponse {
     items: Item[]

@@ -25,8 +25,8 @@ const getCompleteTaskToCsv = async()=>{
     };
     const res = await axios<any,AxiosResponse<CompleteResponse>>(config)
     
-    const {items,projects} = res.data
-    const formattedData = formatData(items,projects)
+    const {data} = res
+    const formattedData = formatData(data)
     const csv = new ObjectsToCsv(formattedData)
     await csv.toDisk('./generated/weeklyCompleteTask.csv');
   }
