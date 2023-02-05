@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from "axios";
 import ObjectsToCsv from "objects-to-csv";
 import { CompleteResponse } from "./type";
 import dayjs from 'dayjs';
+import { formatData } from './formatData';
 
 const getCompleteTaskToCsv = async()=>{
   try{
@@ -23,8 +24,10 @@ const getCompleteTaskToCsv = async()=>{
       }
     };
     const res = await axios<any,AxiosResponse<CompleteResponse>>(config)
-    const data = res.data.items
-    const csv = new ObjectsToCsv(data)
+    
+    const {items,projects} = res.data
+    const formattedData = formatData(items,projects)
+    const csv = new ObjectsToCsv(formattedData)
     await csv.toDisk('./generated/weeklyCompleteTask.csv');
   }
   catch(e){

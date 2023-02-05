@@ -26,7 +26,7 @@ export interface Project {
 }
 
 export interface Projects {
-    [key: number]: Project
+    [key: string]: Project
 }
 
 export interface Sections {}
@@ -35,4 +35,10 @@ export interface CompleteResponse {
     items: Item[]
     projects: Projects
     sections: Sections
+}
+
+export interface FormattedItem {
+    completed_at: string
+    content: string
+    project_name?: string
 }
