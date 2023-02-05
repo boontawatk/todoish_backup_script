@@ -54,7 +54,7 @@ export interface CompleteResponse {
 }
 
 export interface FormattedItem {
-    completed_at: string
+    completed_at: Date
     content: string
     project_name?: string
 }
